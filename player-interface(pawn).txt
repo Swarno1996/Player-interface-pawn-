@@ -1,0 +1,49 @@
+** start of main.py **
+
+from abc import ABC, abstractmethod
+import random
+
+class Player(ABC):
+    def __init__(self):
+        self.moves = []
+        self.position = (0,0)
+        self.path = [self.position]
+
+    #method make_move
+    def make_move(self):
+        dx, dy = random.choice(self.moves)
+        x, y = self.position
+        new_position = (x + dx, y + dy)
+        self.position = new_position
+
+        #append to path
+        self.path.append(new_position)
+
+        return new_position
+    
+    #abstract method
+    @abstractmethod
+    def level_up(self):
+        pass
+
+class Pawn(Player):
+    def __init__(self):
+        super().__init__()
+        self.moves = [(0,1), (1,0), (-1,0), (0,-1)]
+    
+    #level up method
+    def level_up(self):
+        diagonal_moves = [(1,1), (1,-1), (-1,1), (-1,-1)]
+        self.moves.extend(diagonal_moves)
+    
+    
+
+
+
+
+
+
+
+
+** end of main.py **
+
